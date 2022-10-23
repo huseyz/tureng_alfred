@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/deanishe/awgo"
-	"github.com/hzenginx/tureng/tureng"
-	"golang.org/x/text/unicode/norm"
 	"regexp"
 	"strings"
+
+	aw "github.com/deanishe/awgo"
+	"github.com/hzenginx/tureng/tureng"
+	"golang.org/x/text/unicode/norm"
 )
 
 var wf *aw.Workflow

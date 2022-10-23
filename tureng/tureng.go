@@ -45,7 +45,14 @@ func Search(word string) (*SearchResponse, error) {
 		return nil, err
 	}
 
-	resp, err := http.Post(SEARCH_URL, BODY_TYPE, bytes.NewBuffer(requestJson))
+	request, err := http.NewRequest("POST", SEARCH_URL, bytes.NewBuffer(requestJson))
+	if err != nil {
+		return nil, err
+	}
+	request.Header.Set("User-Agent", USER_AGENT)
+	request.Header.Set("Content-Type", BODY_TYPE)
+
+	resp, err := http.DefaultClient.Do(request)
 	if err != nil {
 		return nil, err
 	}
@@ -88,4 +95,5 @@ const (
 	AUTOCOMPLETE_URL = "https://ac.tureng.co?t=%s"
 	SECRET           = "46E59BAC-E593-4F4F-A4DB-960857086F9C"
 	BODY_TYPE        = "application/json"
+	USER_AGENT       = "Mozilla/5.0 (Linux; Android 7.1.1; Android SDK built for x86 Build/NYC; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/67.0.3396.68 Mobile Safari/537.36"
 )
